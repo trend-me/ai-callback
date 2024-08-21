@@ -63,11 +63,13 @@ func (u UseCase) Handle(ctx context.Context, request *models.Request) error {
 func NewUseCase(
 	queueAiPromptBuilder interfaces.QueueAiPromptBuilder,
 	apiPromptRoadMapConfig interfaces.ApiPromptRoadMapConfig,
+	apiPromptRoadMapConfigExecution interfaces.ApiPromptRoadMapConfigExecution,
 	queueOutput interfaces.QueueOutput,
 ) interfaces.UseCase {
 	return &UseCase{
-		queueAiPromptBuilder:   queueAiPromptBuilder,
-		apiPromptRoadMapConfig: apiPromptRoadMapConfig,
-		queueOutput:            queueOutput,
+		queueAiPromptBuilder:            queueAiPromptBuilder,
+		apiPromptRoadMapConfigExecution: apiPromptRoadMapConfigExecution,
+		apiPromptRoadMapConfig:          apiPromptRoadMapConfig,
+		queueOutput:                     queueOutput,
 	}
 }

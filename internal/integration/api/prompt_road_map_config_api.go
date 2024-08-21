@@ -74,7 +74,7 @@ func (p PromptRoadMapConfig) GetPromptRoadMap(ctx context.Context, promptRoadMap
 	return &response, nil
 }
 
-func NewApiPromptRoadMapConfig(url UrlApiPromptRoadMapConfig) interfaces.ApiPromptRoadMapConfig {
+func NewPromptRoadMapConfig(url UrlApiPromptRoadMapConfig) interfaces.ApiPromptRoadMapConfig {
 	return &PromptRoadMapConfig{
 		url: url,
 	}

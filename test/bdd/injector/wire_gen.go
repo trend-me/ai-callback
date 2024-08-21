@@ -29,7 +29,7 @@ func InitializeQueueAiRequesterConsumerMock(geminiMock interfaces.Ai) (interface
 	queueAiCallback := queues.NewAiPromptBuilder(connectionAiCallback)
 	aiFactory := factories.NewAiFactory(geminiMock)
 	urlApiPromptRoadMapConfig := urlApiPromptRoadMapConfigGetter()
-	apiPromptRoadMapConfig := api.NewApiPromptRoadMapConfig(urlApiPromptRoadMapConfig)
+	apiPromptRoadMapConfig := api.NewPromptRoadMapConfig(urlApiPromptRoadMapConfig)
 	urlApiValidation := urlApiValidationGetter()
 	apiValidation := api.NewValidation(urlApiValidation)
 	useCase := usecases.NewUseCase(queueAiCallback, aiFactory, apiPromptRoadMapConfig, apiValidation)
