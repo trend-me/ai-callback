@@ -32,7 +32,8 @@ func Disconnect() error {
 
 func createQueues() error {
 	queues = map[string]*rabbitmq.Queue{
-		"ai-requester":      nil,
+		"ai-callback":      nil,
+		"output-queue":      nil,
 		"ai-prompt-builder": nil,
 	}
 	for k := range queues {

@@ -20,8 +20,8 @@ type UseCase struct {
 func (u UseCase) getNextPromptRoadMapStep(ctx context.Context, request *models.Request) (*models.PromptRoadMap, error) {
 	nextPromptRoadMap, err := u.apiPromptRoadMapConfig.GetPromptRoadMap(ctx, request.PromptRoadMapConfigName, request.PromptRoadMapStep+1)
 	if err != nil {
-		var errParsed exceptions.ErrorType
-		if errors.As(err, &errParsed) && errParsed.Code == exceptions.GetPromptRoadMapConfigErrorCode {
+		var errParsed *exceptions.ErrorType
+		if errors.As(err, &errParsed) && errParsed.Code == exceptions.PromptRoadMapNotFoundErrorCode {
 			return nil, nil
 		}
 		return nil, err
@@ -40,6 +40,8 @@ func (u UseCase) Handle(ctx context.Context, request *models.Request) error {
 
 	if nextPromptRoadMap == nil {
 		err = u.queueOutput.Publish(ctx, request.OutputQueue, request)
+		slog.DebugContext(ctx, "useCase.Handle",
+			slog.String("details", "process finished - output published"))
 		return err
 	}
 
@@ -56,7 +58,7 @@ func (u UseCase) Handle(ctx context.Context, request *models.Request) error {
 	}
 
 	slog.DebugContext(ctx, "useCase.Handle",
-		slog.String("details", "process finished"))
+		slog.String("details", "process finished - next step published"))
 	return nil
 }
 
