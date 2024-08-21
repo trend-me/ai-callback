@@ -1,0 +1,7 @@
+consumer
+.idea
+go.sum
+test/bdd/containers/rabbitmq/data
+test/bdd/containers/rabbitmq/log
+.DS_Store
+.vscode
