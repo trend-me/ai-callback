@@ -106,7 +106,7 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     }
     """
     Given the prompt road map API returns an statusCode '500'
-    Given max receive count is '0'
+    Given max receive count is '-1'
     When the message is consumed by the ai-callback consumer
     Then the prompt_road_map is fetched from the prompt-road-map-api using the prompt_road_map_config_name 'TEST' and step '3'
     And no prompt_road_map_config_execution should be updated
@@ -119,9 +119,10 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     "output_queue":"output-queue",
     "model":"GEMINI",
     "prompt_road_map_step":2,
-    "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} }.
+    "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} },
     "error": {
-      "message": [""],
+      "message": ["response with statusCode: '500 Internal Server Error'"],
+      "code":6,
       "error_type":"Get Prompt Road Map Config Error",
       "abort": false,
       "notify": true 

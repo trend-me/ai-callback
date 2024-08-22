@@ -30,6 +30,7 @@ func (u UseCase) HandleError(ctx context.Context, err error, request *models.Req
 
 	if errParsed.Abort || properties.GetCtxRetryCount(ctx) > properties.GetMaxReceiveCount() {
 		if request != nil {
+			request.Error = &errParsed
 			_ = u.queueOutput.Publish(ctx, request.OutputQueue, request)
 		}
 		return nil
