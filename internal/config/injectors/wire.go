@@ -30,7 +30,7 @@ func newQueueConnectionOutputGetter(connection *rabbitmq.Connection) queues.Conn
 func newQueueConnectionAiCallbackConsumer(connection *rabbitmq.Connection) queues.ConnectionAiCallbackConsumer {
 	return rabbitmq.NewQueue(
 		connection,
-		properties.QueueAiRequester,
+		properties.QueueAiCallback,
 		rabbitmq.ContentTypeJson,
 		properties.CreateQueueIfNX(),
 		true,
@@ -38,10 +38,10 @@ func newQueueConnectionAiCallbackConsumer(connection *rabbitmq.Connection) queue
 	)
 }
 
-func newQueueConnectionAiRequester(connection *rabbitmq.Connection) queues.ConnectionAiPromptBuilder {
+func newQueueConnectionAiPromptBuilder(connection *rabbitmq.Connection) queues.ConnectionAiPromptBuilder {
 	return rabbitmq.NewQueue(
 		connection,
-		properties.QueueAiCallback,
+		properties.QueueAiPromptBuilder,
 		rabbitmq.ContentTypeJson,
 		properties.CreateQueueIfNX(),
 		true,
@@ -70,7 +70,7 @@ func InitializeQueueAiRequesterConsumer() (interfaces.QueueAiCallbackConsumer, e
 		queues.NewAiPromptBuilder,
 		connections.ConnectQueue,
 		newQueueConnectionAiCallbackConsumer,
-		newQueueConnectionAiRequester,
+		newQueueConnectionAiPromptBuilder,
 		queues.NewAiCallbackConsumer)
 	return nil, nil
 }

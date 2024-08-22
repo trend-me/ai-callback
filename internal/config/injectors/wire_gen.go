@@ -25,7 +25,7 @@ func InitializeQueueAiRequesterConsumer() (interfaces.QueueAiCallbackConsumer, e
 		return nil, err
 	}
 	connectionAiCallbackConsumer := newQueueConnectionAiCallbackConsumer(connection)
-	connectionAiPromptBuilder := newQueueConnectionAiRequester(connection)
+	connectionAiPromptBuilder := newQueueConnectionAiPromptBuilder(connection)
 	queueAiPromptBuilder := queues.NewAiPromptBuilder(connectionAiPromptBuilder)
 	urlApiPromptRoadMapConfig := urlApiPromptRoadMapConfigGetter()
 	apiPromptRoadMapConfig := api.NewPromptRoadMapConfig(urlApiPromptRoadMapConfig)
@@ -53,14 +53,14 @@ func newQueueConnectionOutputGetter(connection *rabbitmq.Connection) queues.Conn
 
 func newQueueConnectionAiCallbackConsumer(connection *rabbitmq.Connection) queues.ConnectionAiCallbackConsumer {
 	return rabbitmq.NewQueue(
-		connection, properties.QueueAiRequester, rabbitmq.ContentTypeJson, properties.CreateQueueIfNX(), true,
+		connection, properties.QueueAiCallback, rabbitmq.ContentTypeJson, properties.CreateQueueIfNX(), true,
 		true,
 	)
 }
 
-func newQueueConnectionAiRequester(connection *rabbitmq.Connection) queues.ConnectionAiPromptBuilder {
+func newQueueConnectionAiPromptBuilder(connection *rabbitmq.Connection) queues.ConnectionAiPromptBuilder {
 	return rabbitmq.NewQueue(
-		connection, properties.QueueAiCallback, rabbitmq.ContentTypeJson, properties.CreateQueueIfNX(), true,
+		connection, properties.QueueAiPromptBuilder, rabbitmq.ContentTypeJson, properties.CreateQueueIfNX(), true,
 		true,
 	)
 }

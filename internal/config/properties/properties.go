@@ -14,10 +14,10 @@ type contextKey = struct {
 var ctxReceiveCount contextKey = contextKey{"receiveCount"}
 
 const (
-	QueueAiCallback   = "ai-callback"
-	QueueAiRequester  = "ai-callback"
-	AiModelNameGemini = "gemini"
-	GeminiModel       = "gemini-pro"
+	QueueAiCallback      = "ai-callback"
+	QueueAiPromptBuilder = "ai-prompt-builder"
+	AiModelNameGemini    = "gemini"
+	GeminiModel          = "gemini-pro"
 )
 
 func CreateQueueIfNX() bool {

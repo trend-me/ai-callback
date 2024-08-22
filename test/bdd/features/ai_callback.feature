@@ -19,7 +19,7 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     "response_validation_name":"TEST_RESPONSE",
     "metadata_validation_name":"TEST_METADATA",
     "question_template":"this is a <any.thing>. <any.array> <any.array[0]>",
-    "step":2,
+    "step":3,
     "created_at":"2024-08-01T20:53:49.132Z",
     "updated_at":"2024-08-01T20:53:49.132Z"
     }
@@ -35,7 +35,6 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     "output_queue":"output-queue",
     "model":"GEMINI",
     "prompt_road_map_step":3,
-    "prompt":"this is a test. [1 2 3 4] 1",
     "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} }
     }
     """
@@ -67,7 +66,6 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     "output_queue":"output-queue",
     "model":"GEMINI",
     "prompt_road_map_step":2,
-    "prompt":"this is a test. [1 2 3 4] 1",
     "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} }
     }
     """

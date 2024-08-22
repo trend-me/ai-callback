@@ -20,7 +20,7 @@ type UseCase struct {
 func (u UseCase) getNextPromptRoadMapStep(ctx context.Context, request *models.Request) (*models.PromptRoadMap, error) {
 	nextPromptRoadMap, err := u.apiPromptRoadMapConfig.GetPromptRoadMap(ctx, request.PromptRoadMapConfigName, request.PromptRoadMapStep+1)
 	if err != nil {
-		var errParsed *exceptions.ErrorType
+		var errParsed exceptions.ErrorType
 		if errors.As(err, &errParsed) && errParsed.Code == exceptions.PromptRoadMapNotFoundErrorCode {
 			return nil, nil
 		}

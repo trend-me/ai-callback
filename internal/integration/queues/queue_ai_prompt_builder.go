@@ -31,7 +31,7 @@ type (
 )
 
 func (a aiPromptBuilder) Publish(ctx context.Context, request *models.Request) error {
-	slog.InfoContext(ctx, "AiRequester.Publish",
+	slog.InfoContext(ctx, "aiPromptBuilder.Publish",
 		slog.String("details", "process started"))
 
 	b, err := json.Marshal(aiRequesterMessage{
