@@ -92,3 +92,40 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     And no message should be sent to the 'ai-prompt-builder' queue
     And no message should be sent to the 'output-queue' queue
     And the application should retry
+
+  Scenario: Successfully sends an error to output queue when max retry attempts is reached
+    Given a message with the following data is sent to 'ai-callback' queue:
+    """
+    {
+    "prompt_road_map_config_execution_id":"c713deb9-efa2-4d5f-9675-abe0b7e0c0d4",
+    "prompt_road_map_config_name":"TEST",
+    "output_queue":"output-queue",
+    "prompt_road_map_step":2,
+    "model":"GEMINI",
+    "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} }
+    }
+    """
+    Given the prompt road map API returns an statusCode '500'
+    Given max receive count is '0'
+    When the message is consumed by the ai-callback consumer
+    Then the prompt_road_map is fetched from the prompt-road-map-api using the prompt_road_map_config_name 'TEST' and step '3'
+    And no prompt_road_map_config_execution should be updated
+    And no message should be sent to the 'ai-prompt-builder' queue
+    And a message with the following data should be sent to 'output-queue' queue:
+    """
+    {
+    "prompt_road_map_config_execution_id":"c713deb9-efa2-4d5f-9675-abe0b7e0c0d4",
+    "prompt_road_map_config_name":"TEST",
+    "output_queue":"output-queue",
+    "model":"GEMINI",
+    "prompt_road_map_step":2,
+    "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} }.
+    "error": {
+      "message": [""],
+      "error_type":"Get Prompt Road Map Config Error",
+      "abort": false,
+      "notify": true 
+      }
+    }
+    """
+    And the application should not retry

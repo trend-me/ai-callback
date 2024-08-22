@@ -19,12 +19,13 @@ type (
 	ConnectionOutputGetter func(queueName string) ConnectionOutput
 
 	outputMessage struct {
-		PromptRoadMapConfigName        string         `json:"prompt_road_map_config_name"`
-		PromptRoadMapStep              int            `json:"prompt_road_map_step"`
-		PromptRoadMapConfigExecutionId string         `json:"prompt_road_map_config_execution_id"`
-		OutputQueue                    string         `json:"output_queue"`
-		Model                          string         `json:"model"`
-		Metadata                       map[string]any `json:"metadata"`
+		PromptRoadMapConfigName        string                `json:"prompt_road_map_config_name"`
+		PromptRoadMapStep              int                   `json:"prompt_road_map_step"`
+		PromptRoadMapConfigExecutionId string                `json:"prompt_road_map_config_execution_id"`
+		OutputQueue                    string                `json:"output_queue"`
+		Model                          string                `json:"model"`
+		Error                          *exceptions.ErrorType `json:"error,omitempty"`
+		Metadata                       map[string]any        `json:"metadata"`
 	}
 
 	output struct {
@@ -42,6 +43,7 @@ func (o output) Publish(ctx context.Context, name string, request *models.Reques
 		PromptRoadMapStep:              request.PromptRoadMapStep,
 		OutputQueue:                    request.OutputQueue,
 		Model:                          request.Model,
+		Error:                          request.Error,
 		Metadata:                       request.Metadata,
 	})
 	if err != nil {

@@ -279,6 +279,11 @@ func theValidationAPIReturnsTheFollowingValidationResult(name string, arg1 *godo
 	return nil
 }
 
+func maxReceiveCountIs(count string) error {
+	os.Setenv("MAX_RECEIVE_COUNT", count)
+	return nil
+}
+
 func InitializeScenario(ctx *godog.ScenarioContext) {
 
 	ctx.Before(func(ctx context.Context, sc *godog.Scenario) (context.Context, error) {
@@ -328,6 +333,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^no prompt_road_map should be fetched from the prompt-road-map-api$`, noPrompt_road_mapShouldBeFetchedFromThePromptroadmapapi)
 	ctx.Step(`^no prompt_road_map_config_execution should be updated$`, noPrompt_road_map_config_executionShouldBeUpdated)
 	ctx.Step(`^the application should not retry$`, theApplicationShouldNotRetry)
+	ctx.Step(`^max receive count is \'(.*)\'$`, maxReceiveCountIs)
 	ctx.Step(`^the application should retry$`, theApplicationShouldRetry)
 	ctx.Step(`^the message is consumed by the ai-callback consumer$`, theMessageIsConsumedByTheAipromptbuilderConsumer)
 	ctx.Step(`^the prompt road map API returns an statusCode \'(\d+)\'$`, thePromptRoadMapAPIReturnsAnStatusCode500)

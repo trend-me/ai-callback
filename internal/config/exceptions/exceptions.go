@@ -15,7 +15,7 @@ func NewValidationError(messages ...string) ErrorType {
 		Abort:     true,
 		Notify:    true,
 		ErrorType: "Validation Error",
-		message:   messages,
+		Message:   messages,
 		Code:      ValidationErrorCode,
 	}
 }
@@ -25,7 +25,7 @@ func NewUnknownError(messages ...string) ErrorType {
 		Abort:     false,
 		Notify:    false,
 		ErrorType: "Unknown Error",
-		message:   messages,
+		Message:   messages,
 		Code:      UnknownErrorCode,
 	}
 }
@@ -35,7 +35,7 @@ func NewQueueError(messages ...string) ErrorType {
 		Abort:     false,
 		Notify:    true,
 		ErrorType: "Queue Error",
-		message:   messages,
+		Message:   messages,
 		Code:      QueueErrorCode,
 	}
 }
@@ -45,7 +45,7 @@ func NewPromptRoadMapNotFoundError(messages ...string) ErrorType {
 		Abort:     true,
 		Notify:    true,
 		ErrorType: "Prompt Road Map Not Found Error",
-		message:   messages,
+		Message:   messages,
 		Code:      PromptRoadMapNotFoundErrorCode,
 	}
 }
@@ -55,7 +55,7 @@ func NewGetPromptRoadMapConfigError(messages ...string) ErrorType {
 		Abort:     false,
 		Notify:    true,
 		ErrorType: "Get Prompt Road Map Config Error",
-		message:   messages,
+		Message:   messages,
 		Code:      GetPromptRoadMapConfigErrorCode,
 	}
 }
@@ -64,7 +64,7 @@ func NewUpdatePromptRoadMapConfigExecutionError(messages ...string) ErrorType {
 		Abort:     false,
 		Notify:    true,
 		ErrorType: "Update PromptRoadMapConfigExecution Error",
-		message:   messages,
+		Message:   messages,
 		Code:      UpdatePromptRoadMapConfigExecutionErrorCode,
 	}
 }
