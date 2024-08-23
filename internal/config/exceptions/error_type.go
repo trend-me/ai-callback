@@ -8,7 +8,7 @@ import (
 type ErrorType struct {
 	Abort     bool     `json:"abort"`
 	Notify    bool     `json:"notify"`
-	Code      int      `json:"code"`
+	Code      int      `json:"-"`
 	ErrorType string   `json:"error_type"`
 	Message   []string `json:"message"`
 }

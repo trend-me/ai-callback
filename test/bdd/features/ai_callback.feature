@@ -122,7 +122,6 @@ Feature: Build AI prompts and forward the event to ai-prompt-builder queue
     "metadata":{"any": { "thing":"test", "array":[1,2,3,4]} },
     "error": {
       "message": ["response with statusCode: '500 Internal Server Error'"],
-      "code":6,
       "error_type":"Get Prompt Road Map Config Error",
       "abort": false,
       "notify": true 
