@@ -40,15 +40,20 @@ var (
 	requestPromptRoadMapConfigsApiGetPromptRoadMap    *http.Request
 )
 
-func setup(t *testing.T) {
-	m = mocha.New(t)
-	m.Start()
+func environment() {
 	_ = os.Setenv("URL_API_PROMPT_ROAD_MAP_CONFIG", m.URL()+"/prompt_road_map_configs")
 	_ = os.Setenv("URL_API_PROMPT_ROAD_MAP_CONFIG_EXECUTION", m.URL()+"/prompt_road_map_config_executions")
 	err := godotenv.Load("../.bdd.env")
 	if err != nil {
 		t.Fatalf("Error loading .env file: %v", err)
 	}
+}
+
+func setup(t *testing.T) {
+	m = mocha.New(t)
+	m.Start()
+	var err error
+	environment()
 
 	containers.Up()
 	for range 10 {
@@ -287,6 +292,7 @@ func maxReceiveCountIs(count string) error {
 func InitializeScenario(ctx *godog.ScenarioContext) {
 
 	ctx.Before(func(ctx context.Context, sc *godog.Scenario) (context.Context, error) {
+		environment()
 		if scopePromptRoadMapConfigsApiGetPromptRoadMap != nil {
 			scopePromptRoadMapConfigsApiGetPromptRoadMap.Clean()
 			scopePromptRoadMapConfigsApiGetPromptRoadMap = nil
