@@ -69,7 +69,7 @@ func setup(t *testing.T) {
 		t.Fatal(err.Error())
 	}
 
-	consumer, err = injectors.InitializeQueueAiRequesterConsumer()
+	consumer, err = injectors.InitializeQueueAiCallbackConsumer()
 	if err != nil {
 		t.Fatal(err.Error())
 	}

@@ -57,7 +57,7 @@ func urlApiPromptRoadMapConfigExecutionGetter() api.UrlApiPromptRoadMapConfigExe
 	return properties.UrlApiPromptRoadMapConfigExecution
 }
 
-func InitializeQueueAiRequesterConsumer() (interfaces.QueueAiCallbackConsumer, error) {
+func InitializeQueueAiCallbackConsumer() (interfaces.QueueAiCallbackConsumer, error) {
 	wire.Build(
 		controllers.NewController,
 		urlApiPromptRoadMapConfigGetter,

@@ -19,7 +19,7 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeQueueAiRequesterConsumer() (interfaces.QueueAiCallbackConsumer, error) {
+func InitializeQueueAiCallbackConsumer() (interfaces.QueueAiCallbackConsumer, error) {
 	connection, err := connections.ConnectQueue()
 	if err != nil {
 		return nil, err
